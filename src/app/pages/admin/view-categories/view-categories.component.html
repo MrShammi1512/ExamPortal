@@ -5,7 +5,13 @@
             <mat-icon mat-list-icon>category</mat-icon>
             <div mat-line>{{c.title}}</div>
             <div>
-                <button mat-raised-button color="warn" routerLink="/admin/delete-category">Delete</button>
+                <button [routerLink]="'/admin/update-category/'+c.cid"  mat-raised-button color="primary" >Update</button><br>
+                <!-- routerLink="/admin/update-category" -->
+            </div>
+            &nbsp;&nbsp;
+            <div>
+                <button  (click)="deleteCategory(c.cid)" mat-raised-button color="warn" >Delete</button>
+         
             </div>
             <div mat-line>{{c.description}}</div>
             <mat-divider></mat-divider>

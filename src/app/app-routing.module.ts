@@ -12,6 +12,12 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
 import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
+import { UpdateCategoryComponent } from './pages/admin/update-category/update-category.component';
+import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.component';
+import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
+import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.component';
+import { ViewQuestionComponent } from './pages/admin/view-question/view-question.component';
+import { AddQuestionComponent } from './pages/admin/add-question/add-question.component';
 
 const routes: Routes = [
   {path:'signup', component:SignupComponent, pathMatch:'full'},
@@ -36,10 +42,31 @@ const routes: Routes = [
           path:"add-category",
           component:AddCategoryComponent
         },
-        // {
-        //   path : "delete-category",
-        //   component : DeleteCategoryComponent
-        // }
+        {
+          path : "update-category/:id",
+          component : UpdateCategoryComponent
+        },
+        {
+          path : "quizzes",
+          component : ViewQuizzesComponent
+        },
+        {
+          path : "add-quiz",
+          component : AddQuizComponent
+        },
+        {
+          path : "update-quiz/:qid",
+          component: UpdateQuizComponent
+        },
+        {
+          path : "view-question/:qid/:title",
+          component: ViewQuestionComponent
+        },
+        {
+          path : "add-question/:qid/:title",
+          component : AddQuestionComponent
+        }
+        
       
       ]
       // We configure all routes of admin here

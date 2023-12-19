@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryService } from 'src/services/category.service';
 import Swal from 'sweetalert2';
+import { AddCategoryComponent } from '../add-category/add-category.component';
 
 @Component({
   selector: 'app-view-categories',
@@ -13,7 +15,7 @@ export class ViewCategoriesComponent implements OnInit {
     
    ]
    
-  constructor( private categoryService : CategoryService) { }
+  constructor( private categoryService : CategoryService,private router : Router) { }
 
   ngOnInit(): void {
     this.categoryService.getAllCategory().subscribe(
@@ -28,6 +30,38 @@ export class ViewCategoriesComponent implements OnInit {
       }
     );
   }
+
+  deleteCategory(categoryId : any)
+  
+  {
+    Swal.fire({
+      icon:'info',
+      title:'Are you sure ?',
+      confirmButtonText:'Delete',
+      showCancelButton : true,
+    }).then((result)=>{
+      if(result.isConfirmed)
+      {
+        this.categoryService.deleteCategory(categoryId).subscribe(
+          (data : any)=>{
+            Swal.fire("Category deleted sucessfully");
+            this.categories = this.categories.filter((c: { cid: any; }) => c.cid !== categoryId);
+           // this.router.navigateByUrl("/admin/categories")
+           // Swal.fire("Category deleted sucessfully",'data');
+           // console.log(data);
+          }
+        )
+      }
+
+    })
+   
+   
+  }
+  updateCategory(categoryId: string) {
+    this.router.navigate(['/admin/update-category', categoryId]);
+  }
+  
+  
  
   
 

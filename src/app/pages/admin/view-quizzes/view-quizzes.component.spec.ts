@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteCategoryComponent } from './delete-category.component';
+import { ViewQuizzesComponent } from './view-quizzes.component';
 
-describe('DeleteCategoryComponent', () => {
-  let component: DeleteCategoryComponent;
-  let fixture: ComponentFixture<DeleteCategoryComponent>;
+describe('ViewQuizzesComponent', () => {
+  let component: ViewQuizzesComponent;
+  let fixture: ComponentFixture<ViewQuizzesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleteCategoryComponent ]
+      declarations: [ ViewQuizzesComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DeleteCategoryComponent);
+    fixture = TestBed.createComponent(ViewQuizzesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

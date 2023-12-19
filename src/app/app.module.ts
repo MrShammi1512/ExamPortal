@@ -28,7 +28,14 @@ import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
 import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
-import { DeleteCategoryComponent } from './pages/admin/delete-category/delete-category.component';
+import { UpdateCategoryComponent } from './pages/admin/update-category/update-category.component';
+import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.component';
+import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
+import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.component';
+import { ViewQuestionComponent } from './pages/admin/view-question/view-question.component';
+import { AddQuestionComponent } from './pages/admin/add-question/add-question.component';
 
 
 @NgModule({
@@ -46,7 +53,12 @@ import { DeleteCategoryComponent } from './pages/admin/delete-category/delete-ca
     WelcomeComponent,
     ViewCategoriesComponent,
     AddCategoryComponent,
-    DeleteCategoryComponent
+    UpdateCategoryComponent,
+    ViewQuizzesComponent,
+    AddQuizComponent,
+    UpdateQuizComponent,
+    ViewQuestionComponent,
+    AddQuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +74,8 @@ import { DeleteCategoryComponent } from './pages/admin/delete-category/delete-ca
     MatToolbarModule,
     MatIconModule,
     MatListModule,
+    MatSlideToggleModule,
+    MatSelectModule
     
   ],
   providers: [authIntercepterProvider],
