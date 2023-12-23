@@ -35,4 +35,20 @@ export class QuizService {
     console.log("Quiz adding")
     return this.http.put(`${baseUrl}/quiz/update-quiz`,quiz);
   }
+  
+  // Get quizzess of category
+  public getQuizzessOfCategory(cid : any)
+  {
+    return this.http.get(`${baseUrl}/quiz/category/${cid}`)
+  } 
+
+  // Get active Quizzess
+  public getActiveQuizzess(){
+    return this.http.get(`${baseUrl}/quiz/active`);
+  }
+
+  // Get quizzess by category and active
+  public getQuizzessOfActiveCategory(cid : any){
+    return this.http.get(`${baseUrl}/quiz/category/active/${cid}`);
+  }
 }

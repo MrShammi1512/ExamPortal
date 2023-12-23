@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from 'src/services/question.service';
+import { QuizService } from 'src/services/quiz.service';
+import Swal from 'sweetalert2';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-add-question',
@@ -9,29 +12,36 @@ import { QuestionService } from 'src/services/question.service';
 })
 export class AddQuestionComponent implements OnInit {
 
+  public Editor = ClassicEditor;
   qId : any;
   qTitle : any ;
-  constructor( private _route : ActivatedRoute, private quesService : QuestionService) { }
-
+  
  
-  question : any={
+  quiz : any={
+    
+  }
+  question ={
     quiz:{
-      qId : ''
+      qId:''
     },
     content :'' ,
     option1 :'',
     option2 :'',
     option3 :'',
     option4 :'',
-    answer : ''
+    answer : ''};
+    constructor( private _route : ActivatedRoute, private quesService : QuestionService, private quizService : QuizService, private router : Router) { }
 
-    
-}
   ngOnInit(): void {
     this.qId=this._route.snapshot.params['qid'];
     this.qTitle=this._route.snapshot.params['title'];
-    this.question.quiz['qId']=this.qId;
+    this.question.quiz.qId=this.qId;
     console.log( "qUIZ ID "+this.question.quiz['qId']);
+    this.quizService.getSingleQuiz(this.qId).subscribe(
+    (data)=>{
+      this.quiz=data;
+    }
+    )
   }
 
   addQuestions()
@@ -44,14 +54,20 @@ export class AddQuestionComponent implements OnInit {
     {
       return ;
     }
-    if(this.question.option2.trim()==''  || this.question.option3== null)
+    if(this.question.option2.trim()==''  || this.question.option2== null)
     {
       return ;
     }
-    this.quesService.addQuestion(this.question).subscribe(
+    if(this.question.answer.trim()==''  || this.question.answer== null)
+    {
+      return ;
+    }
+    this.quesService.addQuestion(this.question,this.quiz).subscribe(
       (data)=>
       {
         console.log(data);
+        Swal.fire('Success','Question Added','success');
+        this.router.navigateByUrl("/admin/quizzes")
       }
     )
   }

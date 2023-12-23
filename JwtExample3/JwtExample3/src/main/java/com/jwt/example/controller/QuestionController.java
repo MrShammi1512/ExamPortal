@@ -19,6 +19,7 @@ import org.springframework.web.service.annotation.PutExchange;
 
 import com.jwt.example.entity.exam.Question;
 import com.jwt.example.entity.exam.Quiz;
+import com.jwt.example.entity.exam.Requestdata;
 import com.jwt.example.service.QuestionService;
 import com.jwt.example.service.QuizService; 
 
@@ -34,10 +35,22 @@ public class QuestionController {
 	private QuizService quizService;
 	
 	// Add Question
+//	@PostMapping("/add-question")
+//	public ResponseEntity<?> addQuestion(@RequestBody Question ques )
+//	{
+//		System.out.println(quiz);
+//		return ResponseEntity.ok(questionService.addQuestion(ques));
+//	}
+	
 	@PostMapping("/add-question")
-	public ResponseEntity<?> addQuestion(@RequestBody Question ques )
+	public ResponseEntity<?> addQuestion(@RequestBody Requestdata req )
 	{
-		return ResponseEntity.ok(questionService.addQuestion(ques));
+		Question q=req.getQuestion();
+		Quiz quiz=req.getQuiz();
+		q.setQuiz(quiz);
+		
+		System.out.println(q);
+		return ResponseEntity.ok(questionService.addQuestion(q));
 	}
 	
 	// Update QUestion
@@ -63,10 +76,10 @@ public class QuestionController {
 	
 	// Delete Questions
 	@DeleteMapping("/{quesId}")
-	public String deleteQUestion(@PathVariable("quesId") Long quesId)
+	public void deleteQUestion(@PathVariable("quesId") Long quesId)
 	{
 		questionService.deleteQuestion(quesId);
-		return "Deleted Sucessfully";
+		//return "Deleted Sucessfully";
 	}
 	
 	// Get all Qqestions of Quiz

@@ -1,11 +1,13 @@
 package com.jwt.example.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jwt.example.entity.exam.Category;
 import com.jwt.example.entity.exam.Quiz;
 import com.jwt.example.repo.QuizRepository;
 
@@ -46,6 +48,25 @@ public class QuizServiceImpl implements QuizService{
 		System.out.println(qId);
 		quizRepository.deleteById(qId);
 		
+	}
+
+	@Override
+	public List<Quiz> getQuizzessofCategory(Category c) {
+		// TODO Auto-generated method stub
+		List<Quiz> findByCategory = quizRepository.findByCategory(c);
+		return findByCategory;
+	}
+
+	@Override
+	public List<Quiz> getActiveQuiz() {
+		// TODO Auto-generated method stub
+		return quizRepository.findByActive(true);
+	}
+
+	@Override
+	public List<Quiz> getQuizByCategoryAndActive(Category c) {
+		// TODO Auto-generated method stub
+		return quizRepository.findByCategoryAndActive(c, true);
 	}
 
 }

@@ -37,4 +37,27 @@ export class ViewQuestionComponent implements OnInit {
 
   }
 
-}
+  deleteQuestion(questionid : any)
+  {
+    Swal.fire({
+      icon:'info',
+      title:'Are you sure ?',
+      confirmButtonText:'Delete',
+      showCancelButton : true,
+    }).then((result)=>{
+      if(result.isConfirmed)
+      {
+        this.quesService.deleteQuestion(questionid).subscribe(
+          (data : any)=>{
+           
+            this.questions = this.questions.filter((q: { quesId: any; }) => q.quesId !== questionid);
+            Swal.fire("Category deleted sucessfully");
+          }
+        );
+        }
+        })
+      }
+    }
+      
+
+

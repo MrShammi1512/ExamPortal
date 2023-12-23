@@ -18,6 +18,8 @@ import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
 import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.component';
 import { ViewQuestionComponent } from './pages/admin/view-question/view-question.component';
 import { AddQuestionComponent } from './pages/admin/add-question/add-question.component';
+import { UpdateQuestionComponent } from './pages/admin/update-question/update-question.component';
+import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
 
 const routes: Routes = [
   {path:'signup', component:SignupComponent, pathMatch:'full'},
@@ -65,13 +67,27 @@ const routes: Routes = [
         {
           path : "add-question/:qid/:title",
           component : AddQuestionComponent
+        },
+        {
+          path : "update-question/:qid",
+          component : UpdateQuestionComponent
         }
         
       
       ]
       // We configure all routes of admin here
   },
-  {path : 'user-dashboard',component : UserDashboardComponent,pathMatch:'full',canActivate : [UserGuard]}
+  {
+    path : 'user-dashboard',
+    component : UserDashboardComponent,
+    canActivate : [UserGuard],
+    children :[
+      {
+        path:':catId',
+        component: LoadQuizComponent
+      }
+    ]
+  }
 
 ];
 
