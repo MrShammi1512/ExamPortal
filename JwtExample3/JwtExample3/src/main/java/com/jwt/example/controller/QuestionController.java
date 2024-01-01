@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.service.annotation.PutExchange;
 
@@ -102,6 +103,12 @@ public class QuestionController {
 		{
 			list=list.subList(0, Integer.parseInt(quiz.getNumberOfQuestions()+1));
 		}
+		
+		list.forEach((q)->{
+			q.setAnswer("");
+			
+		});
+		
 		Collections.shuffle(list);
 		return ResponseEntity.ok(list);
 	}
@@ -115,6 +122,34 @@ public class QuestionController {
 		return ResponseEntity.ok(questions);
 		
 		
+	}
+	
+	// Evaluating the quiz
+	@PostMapping("/eval-quiz")
+	public ResponseEntity<?> evaluateQuiz(@RequestBody List<Question> question){
+		
+		System.out.println(question);
+		int correctAnswer=0;
+		int attempted=0;
+		double marksGot=0;
+		double singleMark=Double.parseDouble(question.get(0).getQuiz().getMaxMarks())/question.size();
+		for(Question q : question){
+		Question question2 = this.questionService.get(q.getQuesId());
+		
+		if(question2.getAnswer().equals(q.getGivenAnswer())) {
+			correctAnswer++;
+			marksGot +=singleMark;
+			//System.out.println("Marks Got  : "+marksGot);
+		}
+		System.out.println("Given Answer ="+q.getGivenAnswer());
+		
+		if(q.getGivenAnswer()!=null ) {
+			attempted++;
+		}
+		
+		}
+		Map<String,Object> map=Map.of("marksGot",marksGot,"correctAnswer",correctAnswer,"attempted",attempted);
+		return ResponseEntity.ok(map);
 	}
 
 }

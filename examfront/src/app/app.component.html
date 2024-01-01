@@ -1,2 +1,16 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<ngx-ui-loader
+    fgsColor="#ff4081"
+     text="Please Wait...."
+     pbColor="#ff4081"
+     fgsType= "three-strings"
+     textColor="#ff4081"
+     [logoSize]="20"
+     [fgsSize]="80"
+     >
+</ngx-ui-loader>
+
+<div ngxUiLoaderBlurred (blur)="10">
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+</div>
+
